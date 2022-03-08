@@ -69,9 +69,18 @@ const updateState = (newState) => {
   gameState = newState;
 };
 
-const onCompleteLevel = (levelState) => {
+const onLevelComplete = (levelState) => {
   gameState = levelState;
-  go(Level2SceneKey, { gameState, updateState, onCompleteLevel });
+  go(Level2SceneKey, {
+    gameState,
+    updateState,
+    onCompleteLevel: onLevelComplete,
+  });
 };
 
-go(Level1SceneKey, { gameState, updateState, onCompleteLevel });
+const onGameOver = (levelState) => {
+  gameState = levelState;
+  console.log("Game Over", levelState);
+};
+
+go(Level1SceneKey, { gameState, updateState, onLevelComplete, onGameOver });
