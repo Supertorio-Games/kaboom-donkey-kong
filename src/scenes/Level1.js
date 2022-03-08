@@ -1,16 +1,14 @@
 import k from "../game";
 import { levelMargin, barrelSpawnDelay, levelConfig } from "../config";
 import { barrelsMap } from "../entities/barrelsMap";
-import { barrel, barrelTag } from "../entities/barrel";
 import { donkeyKong } from "../entities/donkeyKong";
 import { pauline } from "../entities/pauline";
 import { plumber, plumberTag } from "../entities/plumber";
+import barrelManager, { barrelTag } from "../entities/barrelManager";
 import livesCounter from "../entities/livesCounter";
 import numberBar, { NUMBER_BAR_TYPE } from "../entities/numberBar";
 
 export const Level1SceneKey = "level1";
-
-let shouldSpawn = true;
 
 const barrelSpawnPosition = k.vec2(levelMargin + 5, levelMargin + 48);
 const donkeyKongPos = k.vec2(levelMargin + 2, levelMargin + 12);
@@ -21,15 +19,6 @@ const numberBarPos = k.vec2(k.width() - levelMargin - 80, levelMargin);
 
 const startTime = 5000;
 const levelTick = 2000;
-
-const spawnBarrel = () => {
-  if (shouldSpawn) {
-    k.add(barrel(barrelSpawnPosition));
-  }
-  k.wait(barrelSpawnDelay, () => {
-    spawnBarrel();
-  });
-};
 
 export const Level1Scene = k.scene(
   Level1SceneKey,
@@ -63,6 +52,12 @@ export const Level1Scene = k.scene(
     // Plumber
     const mario = k.add(plumber(pluberSpawnPos, levelConfig.level1));
 
+    // Barrels
+    const barrelsMngr = new barrelManager(
+      barrelSpawnPosition,
+      barrelSpawnDelay
+    );
+
     // Handle collisions
     k.onCollide(plumberTag, barrelTag, (gameObj1, gameObj2, col) => {
       // console.log("mario + barrel", gameObj1, gameObj2, col);
@@ -71,7 +66,7 @@ export const Level1Scene = k.scene(
 
     const resetLevel = () => {
       clearInterval(levelTimer);
-      // TODO Reset Barrels
+      barrelsMngr.stopSpawing();
       mario.moveTo(pluberSpawnPos);
       timerBar.updateNumber(startTime);
     };
@@ -100,7 +95,7 @@ export const Level1Scene = k.scene(
       }, levelTick);
 
       // Barrels
-      spawnBarrel();
+      barrelsMngr.startSpawning();
     };
 
     startLevel();
