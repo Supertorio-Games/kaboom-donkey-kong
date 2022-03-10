@@ -21,12 +21,14 @@ export default function characterController(levelConfig) {
     inputManager: null,
     currentLadder: null,
     direction: 1,
+    currentAudio: null,
     add() {
       this.characterState = createMachine({
         initialState: "idle",
         idle: {
           actions: {
             onEnter: () => {
+              this.stopAudio();
               this.play("idle");
             },
           },
@@ -45,6 +47,8 @@ export default function characterController(levelConfig) {
         walk: {
           actions: {
             onEnter: () => {
+              this.stopAudio();
+              this.currentAudio = k.play("walk", { loop: true });
               this.play("walk");
             },
           },
@@ -63,7 +67,10 @@ export default function characterController(levelConfig) {
         jump: {
           actions: {
             onEnter: () => {
-              this.play("jump");
+              this.stopAudio();
+              this.currentAudio = this.play("jump");
+
+              k.play("jump");
             },
           },
           transitions: {
@@ -78,6 +85,8 @@ export default function characterController(levelConfig) {
         climb: {
           actions: {
             onEnter: () => {
+              this.stopAudio();
+              this.currentAudio = k.play("walk", { loop: true });
               this.play("climb");
             },
           },
@@ -93,6 +102,7 @@ export default function characterController(levelConfig) {
         climbIdle: {
           actions: {
             onEnter: () => {
+              this.stopAudio();
               this.play("climbIdle");
             },
           },
@@ -106,6 +116,12 @@ export default function characterController(levelConfig) {
 
       this.inputManager = new inputManager(k);
       this.inputManager.onJump(this._jump);
+    },
+    stopAudio() {
+      if (this.currentAudio) {
+        this.currentAudio.stop();
+        this.currentAudio = null;
+      }
     },
     update() {
       const horzInput = this.inputManager.getAxisHoriz();
