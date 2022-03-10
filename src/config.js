@@ -1,6 +1,6 @@
 export const gameResolution = [192, 192];
 export const levelMargin = 20;
-export const barrelSpawnDelay = 3;
+export const barrelSpawnDelay = 5;
 
 export const levelConfig = {
   level1: {

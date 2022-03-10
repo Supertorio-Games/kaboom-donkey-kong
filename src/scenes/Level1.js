@@ -16,6 +16,7 @@ const paulinePos = k.vec2(85, levelMargin + 15);
 const pluberSpawnPos = k.vec2(levelMargin + 30, k.height() - levelMargin - 2);
 const lifeTokenPos = k.vec2(k.width() - levelMargin, 20 + levelMargin);
 const numberBarPos = k.vec2(k.width() - levelMargin - 80, levelMargin);
+const goalPos = k.vec2(levelMargin + 88, levelMargin + 35);
 
 const startTime = 5000;
 const levelTick = 2000;
@@ -58,10 +59,28 @@ export const Level1Scene = k.scene(
       barrelSpawnDelay
     );
 
+    // Goal
+    k.add([
+      k.pos(goalPos),
+      k.rect(8, 1),
+      k.area(),
+      k.color(0, 0, 0), // TODO: Can we make transparent collision rectangles
+      k.body({
+        solid: false,
+        weight: 0,
+      }),
+      "GOAL",
+    ]);
+
     // Handle collisions
     k.onCollide(plumberTag, barrelTag, (gameObj1, gameObj2, col) => {
       // console.log("mario + barrel", gameObj1, gameObj2, col);
       loseLife();
+    });
+
+    k.onCollide(plumberTag, "GOAL", () => {
+      mario.stopAudio();
+      onLevelComplete();
     });
 
     const resetLevel = () => {
@@ -74,6 +93,7 @@ export const Level1Scene = k.scene(
     const loseLife = () => {
       lives.removeLife();
       gameState.lives--;
+      k.play("die");
 
       // Reset Level
       if (gameState.lives > 0) {

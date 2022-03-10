@@ -1,5 +1,5 @@
 import k from "../game";
-import { rivitsMap } from "../entities/barrelsMap";
+import { rivitsMap } from "../entities/rivitsMap";
 
 export const Level2SceneKey = "level2";
 
