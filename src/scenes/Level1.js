@@ -7,6 +7,7 @@ import { plumber, plumberTag } from "../entities/plumber";
 import barrelManager, { barrelTag } from "../entities/barrelManager";
 import livesCounter from "../entities/livesCounter";
 import numberBar, { NUMBER_BAR_TYPE } from "../entities/numberBar";
+import VolumeController from "../utils/volumeController";
 
 export const Level1SceneKey = "level1";
 
@@ -25,6 +26,7 @@ export const Level1Scene = k.scene(
   Level1SceneKey,
   async ({ gameState, updateState, onLevelComplete, onGameOver }) => {
     let levelTimer;
+    let volumeController = new VolumeController(k);
 
     // Level Map
     k.add(barrelsMap());
