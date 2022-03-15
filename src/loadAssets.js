@@ -2,6 +2,8 @@ import k from "./game";
 
 export default () => {
   // Sprites and Animations
+  k.loadSprite("startGraphic", "sprites/start-screen.png");
+
   k.loadSprite("donkeyKong", "sprites/donkey-kong.png", {
     sliceX: 2,
     anims: {

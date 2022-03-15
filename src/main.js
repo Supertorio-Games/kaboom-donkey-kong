@@ -1,18 +1,28 @@
 import k from "./game";
 import loadAssets from "./loadAssets";
+import { StartSceneKey } from "./scenes/Start";
 import { Level1SceneKey } from "./scenes/Level1";
 import { Level2SceneKey } from "./scenes/Level2";
+import { GameOverSceneKey } from "./scenes/GameOver";
 
-let gameState = {
+const DEFAULT_GAME_STATE = {
   levelsCompleted: 0,
   score: 0,
   lives: 3,
 };
+let gameState;
 
 loadAssets();
 
 const updateState = (newState) => {
   gameState = newState;
+};
+
+const onStartGame = () => {
+  gameState = {
+    ...DEFAULT_GAME_STATE,
+  };
+  k.go(Level1SceneKey, { gameState, updateState, onLevelComplete, onGameOver });
 };
 
 const onLevelComplete = (levelState) => {
@@ -27,7 +37,11 @@ const onLevelComplete = (levelState) => {
 
 const onGameOver = (levelState) => {
   gameState = levelState;
-  console.log("Game Over", levelState);
+  k.go(GameOverSceneKey, { gameState, onReturnToStart });
 };
 
-k.go(Level1SceneKey, { gameState, updateState, onLevelComplete, onGameOver });
+const onReturnToStart = () => {
+  k.go(StartSceneKey, { onStartGame });
+};
+
+k.go(StartSceneKey, { onStartGame });

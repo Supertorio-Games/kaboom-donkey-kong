@@ -76,7 +76,6 @@ export const Level1Scene = k.scene(
 
     // Handle collisions
     k.onCollide(plumberTag, barrelTag, (gameObj1, gameObj2, col) => {
-      // console.log("mario + barrel", gameObj1, gameObj2, col);
       loseLife();
     });
 
@@ -95,6 +94,7 @@ export const Level1Scene = k.scene(
     const loseLife = () => {
       lives.removeLife();
       gameState.lives--;
+      mario.stopAudio();
       k.play("die");
 
       // Reset Level
