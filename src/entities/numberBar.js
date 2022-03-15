@@ -1,4 +1,5 @@
 import k from "../game";
+import { clamp } from "../utils/math";
 
 export const NUMBER_BAR_TYPE = {
   TIMER: 0,
@@ -29,14 +30,16 @@ export default function numberBar(startValue, barType, pos) {
     // Since we draw the sprites from right to left, we have to adjust the
     // number frames in reverse. We unshift them onto the array in state so
     // that we can address them left to right on update.
-    sprite.frame = this.numDigits[this.numDigits.length - 1 - i] + barType;
+    const frameNumber = this.numDigits[this.numDigits.length - 1 - i] + barType;
+    sprite.frame = clamp(0, 19, frameNumber);
     this.numberSprites.unshift(sprite);
   }
 
   this.updateNumber = (nextNumber) => {
     this.numDigits = getNumberDigits(nextNumber);
     for (let i = 0; i < this.numDigits.length; i++) {
-      this.numberSprites[i].frame = this.numDigits[i] + barType;
+      const frameNumber = this.numDigits[i] + barType;
+      this.numberSprites[i].frame = clamp(0, 19, frameNumber);
     }
   };
 }

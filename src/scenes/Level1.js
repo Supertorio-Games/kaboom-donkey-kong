@@ -52,8 +52,17 @@ export const Level1Scene = k.scene(
     // DK
     k.add(donkeyKong(donkeyKongPos));
 
+    const scoreBarrel = () => {
+      gameState.score += 500;
+      k.play("over");
+    };
+
     // Plumber
-    const mario = k.add(plumber(pluberSpawnPos, levelConfig.level1));
+    const mario = k.add(
+      plumber(pluberSpawnPos, levelConfig.level1, {
+        onScoreBarrel: scoreBarrel,
+      })
+    );
 
     // Barrels
     const barrelsMngr = new barrelManager(
@@ -102,6 +111,7 @@ export const Level1Scene = k.scene(
         resetLevel();
         startLevel();
       } else {
+        clearInterval(levelTimer);
         onGameOver(gameState);
       }
     };
