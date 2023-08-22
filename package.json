@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base=/kaboom-donkey-kong/",
     "preview": "vite preview"
   },
   "author": "",
