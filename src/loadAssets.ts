@@ -59,7 +59,7 @@ export default () => {
   });
 
   // Fonts
-  k.loadBitmapFont("unscii", "/fonts/unscii_8x8.png", 8, 8)
+  k.loadBitmapFont("unscii", "fonts/unscii_8x8.png", 8, 8)
 
   // Audio Files
   k.loadSound("die", "sounds/dk-a2600_die.ogg");
