@@ -1,17 +1,17 @@
 import k from "@/game";
-import { levelMargin, displayFont } from "@/config";
+import { levelMargin, titleFont, bodyFont } from "@/config";
 
 export const SCENE_KEY = "start-screen";
 
 export default k.scene(SCENE_KEY, ({ onStartGame }) => {
   k.add([
     k.text("DONKEY KONG\n  KABOOM!", {
-      size: 18,
-      width: 150,
-      font: displayFont,
+      size: 17,
+      width: 200,
+      font: titleFont,
       lineSpacing: 5,
     }),
-    k.pos(levelMargin + 22, levelMargin + 5),
+    k.pos(levelMargin + 2, levelMargin + 5),
     k.color(66, 152, 211),
   ]);
 
@@ -24,25 +24,10 @@ export default k.scene(SCENE_KEY, ({ onStartGame }) => {
   k.add([
     k.text("Press Enter to Continue", {
       size: 8,
-      width: 140,
-      font: displayFont,
+      font: bodyFont,
     }),
-    k.pos(levelMargin + 25, levelMargin + 148),
+    k.pos(levelMargin + 12, levelMargin + 148),
     k.color(255, 255, 255),
-  ]);
-
-  k.add([
-    k.text(
-      "This game was created by @supertorio with Kaboom.js for educational purposes.",
-      {
-        size: 5,
-        width: 150,
-        font: displayFont,
-        lineSpacing: 1.5,
-      }
-    ),
-    k.pos(levelMargin + 20, levelMargin + 160),
-    k.color(195, 195, 195),
   ]);
 
   k.onKeyPress("enter", () => {

@@ -11,7 +11,7 @@ export enum Direction {
 
 export type RollComp = {
   direction: Direction;
-  isFalling: boolean;
+  isDropping: boolean;
   drops: number;
   lastDropPos: number;
 } & GameObj &
@@ -29,11 +29,11 @@ export default function roll() {
     id: "roll",
     require: ["pos", "sprite"],
     direction: Direction.RIGHT,
-    isFalling: false,
+    isDropping: false,
     drops: 0,
     lastDropPos: 0,
     update(this: RollComp) {
-      if (!this.isFalling) {
+      if (!this.isDropping) {
         //Rolling
         if (this.drops > 4 && this.pos.x < destroyBounds) {
           this.destroy();
@@ -64,14 +64,14 @@ export default function roll() {
     _fall(this: RollComp) {
       this.pos.y += dropSpeed * k.dt();
       if (this.pos.y > this.lastDropPos + 21) {
-        this.isFalling = false;
+        this.isDropping = false;
         this.play("roll");
       }
     },
     _dropPlatform(this: RollComp) {
       this.direction =
         this.direction === Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-      this.isFalling = true;
+      this.isDropping = true;
       this.play("fall");
       this.drops++;
       this.lastDropPos = this.pos.y;

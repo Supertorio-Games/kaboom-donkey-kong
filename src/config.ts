@@ -1,6 +1,7 @@
 export const levelMargin = 20;
 export const barrelSpawnDelay = 5;
-export const displayFont = "sink";
+export const titleFont = "unscii";
+export const bodyFont = "unscii"
 
 export type LevelPlatform = {
   xMin: number;

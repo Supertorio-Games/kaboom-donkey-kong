@@ -71,8 +71,8 @@ export const Level1Scene = k.scene(
       k.area(),
       k.color(0, 0, 0), // TODO: Can we make transparent collision rectangles
       k.body({
-        solid: false,
-        weight: 0,
+        isStatic: false,
+        gravityScale: 0,
       }),
       "GOAL",
     ]);

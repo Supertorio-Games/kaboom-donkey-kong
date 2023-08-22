@@ -1,7 +1,6 @@
 import {
   AreaComp,
   BodyComp,
-  OriginComp,
   PosComp,
   SpriteComp,
   Vec2,
@@ -20,7 +19,6 @@ type PlumberEntity = (
   | SpriteComp
   | AreaComp
   | BodyComp
-  | OriginComp
   | PosComp
   | CharacterControllerComp
   | JumpScorerComponent
@@ -39,14 +37,13 @@ export const plumber = (
     }),
     k.area({
       offset: k.vec2(0, -5),
-      width: 16,
-      height: 10,
+      shape: new k.Rect(k.vec2(0, 0), 16, 10)
     }),
     k.body({
-      solid: false,
-      weight: 0,
+      isStatic: false,
+      gravityScale: 0,
     }),
-    k.origin("botleft"),
+    k.anchor("botleft"),
     k.pos(starPos),
     characterController(levelConfig),
 

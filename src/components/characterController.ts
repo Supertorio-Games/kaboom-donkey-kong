@@ -147,17 +147,17 @@ export default function characterController(
       else this._stop();
     },
     destroy() {
-      onJumpCancel && onJumpCancel();
+      onJumpCancel?.();
     },
     stopAudio() {
       if (currentAudio) {
-        currentAudio.stop();
+        currentAudio.paused = true;
         currentAudio = null;
       }
     },
     _setDirection(this: SpriteComp, horzInput: number) {
       direction = horzInput !== 0 ? horzInput : direction;
-      this.flipX(direction < 0);
+      this.flipX = direction < 0;
     },
     _move(this: PosComp & CharacterControllerComp, horzInput: number) {
       this._setDirection(horzInput);
@@ -171,7 +171,7 @@ export default function characterController(
       }
       const currPlatform = this._getCurrentPlatform();
       const platformAngleDir = levelConfig.platforms[currPlatform].slope;
-      const slopeAngle = levelConfig.slopeAngle || 0;
+      const slopeAngle = levelConfig.slopeAngle ?? 0;
       const movementVector = angleToVec2(
         direction < 0 ? slopeAngle : slopeAngle * -1
       );

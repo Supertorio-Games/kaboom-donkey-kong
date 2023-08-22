@@ -14,7 +14,6 @@ const ROOT_ELEMENT_ID = "kaboom";
 const DISABLE_ANTIALIAS = false;
 
 const ENABLE_DEBUG = true;
-const COLLIER_DEBUG_COLOR = [94, 255, 137, 1];
 
 /*************************************************************************/
 export default kaboom({
@@ -27,5 +26,4 @@ export default kaboom({
   stretch: false,
   debug: ENABLE_DEBUG,
   crisp: DISABLE_ANTIALIAS,
-  inspectColor: COLLIER_DEBUG_COLOR,
 });

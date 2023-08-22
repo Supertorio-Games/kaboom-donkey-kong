@@ -6,6 +6,7 @@ import type {
   PosComp,
   TextComp,
 } from "kaboom";
+import {titleFont} from '../config';
 
 const DATA_KEY_VOLUME = "dk_volume";
 const volumeIncrement = 0.2;
@@ -19,7 +20,7 @@ export default function volumeController(kaboomInst: KaboomCtx) {
     kaboomInst.text("Volume", {
       size: 5,
       width: 60,
-      font: "sink",
+      font: titleFont,
     }),
     kaboomInst.pos(kaboomInst.width() - 50, 5),
     kaboomInst.color(255, 255, 255),

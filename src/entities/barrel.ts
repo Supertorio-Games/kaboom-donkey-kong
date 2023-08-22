@@ -12,8 +12,8 @@ export const barrel = (starPos: Vec2) => [
   k.pos(starPos.x, starPos.y),
   k.area(),
   k.body({
-    solid: false,
-    weight: 0,
+    isStatic: false,
+    gravityScale: 0,
   }),
   roll(),
   barrelTag,
