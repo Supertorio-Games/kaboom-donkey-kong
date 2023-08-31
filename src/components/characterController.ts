@@ -16,10 +16,12 @@ export type CharacterControllerComp = {
   _move: (input: number) => void;
   _climb: (input: number) => void;
   _jump: () => void;
+  _jumpOffLadder: () =>  void;
   _land: () => void;
   _stop: () => void;
   _getCurrentPlatform: () => number;
   _canClimb: (input: number) => boolean;
+  _ladderComplete: boolean;
   inputManager: any;
 } & Comp;
 
@@ -46,6 +48,9 @@ export default function characterController(
     inputManager: null,
     add(this: SpriteComp & CharacterControllerComp) {
       this.inputManager = inputManager(k);
+      this.inputManager.onHorizRelease();
+      onJumpCancel = this.inputManager.onJump(this._jump);
+
       this.characterState = createMachine({
         initialState: "idle",
         states: {
@@ -120,6 +125,12 @@ export default function characterController(
               finish: {
                 target: "idle",
               },
+              land: {
+                target: "idle",
+              },
+              landAndGo: {
+                target: "walk",
+              },
             },
           },
           climbIdle: {
@@ -133,11 +144,17 @@ export default function characterController(
               continue: {
                 target: "climb",
               },
+              land: {
+                target: "idle",
+              },
+              landAndGo: {
+                target: "walk",
+              },
             },
           },
         },
       });
-      onJumpCancel = this.inputManager.onJump(this._jump);
+      
     },
     update() {
       const horzInput = this.inputManager.getAxisHoriz();
@@ -164,8 +181,11 @@ export default function characterController(
       if (
         this.characterState?.value === "climb" ||
         this.characterState?.value === "climbIdle"
-      )
+      ) {
+        console.log(this.characterState.value)
+        this._jumpOffLadder();
         return;
+      }
       if (this.characterState?.value === "idle") {
         this.characterState.transition(this.characterState.value, "walk");
       }
@@ -224,6 +244,25 @@ export default function characterController(
       } else if (this._canClimb(vertInput)) {
         this.characterState?.transition(this.characterState.value, "climb");
       }
+    },
+    _jumpOffLadder(this: PosComp & CharacterControllerComp) {
+      console.log('jumping off ladder');
+      currentLadder = null;
+      const currPlatform = this._getCurrentPlatform();
+      this.pos.y = clamp(
+        levelConfig.platforms[currPlatform].yMin +
+          levelMargin +
+          levelConfig.offsetTop,
+        levelConfig.platforms[currPlatform].yMax +
+          levelMargin +
+          levelConfig.offsetTop,
+        this.pos.y + JUMP_OFFSET
+      );
+      console.log('transitioning to next state', this.inputManager.getAxisHoriz() !== 0 ? "landAndGo" : "land")
+      this.characterState?.transition(
+        this.characterState.value,
+        this.inputManager.getAxisHoriz() !== 0 ? "landAndGo" : "land"
+      );
     },
     _jump(this: PosComp & CharacterControllerComp) {
       const result = this.characterState?.transition(

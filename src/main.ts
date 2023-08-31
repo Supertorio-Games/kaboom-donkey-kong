@@ -50,4 +50,8 @@ const onReturnToStart = () => {
   k.go(StartSceneKey, { onStartGame });
 };
 
-k.go(StartSceneKey, { onStartGame });
+// k.go(StartSceneKey, { onStartGame });
+gameState = {
+  ...DEFAULT_GAME_STATE,
+};
+k.go(Level2SceneKey, { gameState, updateState, onLevelComplete, onGameOver });

@@ -4,6 +4,7 @@ export type InputManager = {
   getAxisHoriz: () => number;
   getAxisVert: () => number;
   onJump: (callback: () => void) => void;
+  onHorizRelease: (callback: () => void) => void;
 };
 
 export default function inputManager(kaboomInst: KaboomCtx): InputManager {
@@ -23,6 +24,13 @@ export default function inputManager(kaboomInst: KaboomCtx): InputManager {
     return minuxX + plusX;
   };
 
+  const onHorizRelease = (callback: () => void) => {
+    kaboomInst.onKeyRelease("up", callback);
+    kaboomInst.onKeyRelease("down", callback);
+    kaboomInst.onKeyRelease("w", callback);
+    kaboomInst.onKeyRelease("s", callback);
+  };
+
   const onJump = (callback: () => void) => {
     kaboomInst.onKeyPress("space", callback);
   };
@@ -31,5 +39,6 @@ export default function inputManager(kaboomInst: KaboomCtx): InputManager {
     getAxisHoriz,
     getAxisVert,
     onJump,
+    onHorizRelease,
   };
 }
