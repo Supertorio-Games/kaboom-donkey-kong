@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/kaplay-donkey-kong/",
+    "build": "tsc && vite build",
+    "build-pages": "tsc && vite build --base=/kaboom-donkey-kong/",
     "preview": "vite preview"
   },
   "author": "",
