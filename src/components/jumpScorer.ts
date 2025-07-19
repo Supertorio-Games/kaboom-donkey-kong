@@ -1,4 +1,4 @@
-import type { Comp, PosComp } from "kaboom";
+import type { Comp, PosComp } from "kaplay";
 import k from "@/game";
 import type { CharacterControllerComp } from "./characterController";
 

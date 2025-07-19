@@ -1,4 +1,4 @@
-import type { KaboomCtx } from "kaboom";
+import type { KAPLAYCtx } from "kaplay";
 
 export type InputManager = {
   getAxisHoriz: () => number;
@@ -6,25 +6,25 @@ export type InputManager = {
   onJump: (callback: () => void) => void;
 };
 
-export default function inputManager(kaboomInst: KaboomCtx): InputManager {
+export default function inputManager(kaplayInst: KAPLAYCtx): InputManager {
   const getAxisHoriz = () => {
     const minuxX =
-      kaboomInst.isKeyDown("left") || kaboomInst.isKeyDown("a") ? -1 : 0;
+      kaplayInst.isKeyDown("left") || kaplayInst.isKeyDown("a") ? -1 : 0;
     const plusX =
-      kaboomInst.isKeyDown("right") || kaboomInst.isKeyDown("d") ? 1 : 0;
+      kaplayInst.isKeyDown("right") || kaplayInst.isKeyDown("d") ? 1 : 0;
     return minuxX + plusX;
   };
 
   const getAxisVert = () => {
     const minuxX =
-      kaboomInst.isKeyDown("up") || kaboomInst.isKeyDown("w") ? 1 : 0;
+      kaplayInst.isKeyDown("up") || kaplayInst.isKeyDown("w") ? 1 : 0;
     const plusX =
-      kaboomInst.isKeyDown("down") || kaboomInst.isKeyDown("s") ? -1 : 0;
+      kaplayInst.isKeyDown("down") || kaplayInst.isKeyDown("s") ? -1 : 0;
     return minuxX + plusX;
   };
 
   const onJump = (callback: () => void) => {
-    kaboomInst.onKeyPress("space", callback);
+    kaplayInst.onKeyPress("space", callback);
   };
 
   return {

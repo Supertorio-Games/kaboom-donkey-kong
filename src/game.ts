@@ -1,4 +1,4 @@
-import kaboom from "kaboom";
+import kaplay, { RGBAValue } from "kaplay";
 
 /** Configure your Game Setup Here **/
 
@@ -9,14 +9,14 @@ const GAME_WIDTH = 232;
 const GAME_HEIGHT = 232;
 const GAME_SCALE = 3;
 
-const BACKGROUND_COLOR = [0, 0, 0, 1];
-const ROOT_ELEMENT_ID = "kaboom";
-const DISABLE_ANTIALIAS = false;
+const BACKGROUND_COLOR : RGBAValue = [0, 0, 0, 1];
+const ROOT_ELEMENT_ID : string = "kaplay";
+const DISABLE_ANTIALIAS : boolean = false;
 
 const ENABLE_DEBUG = true;
 
 /*************************************************************************/
-export default kaboom({
+export default kaplay({
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   scale: GAME_SCALE,

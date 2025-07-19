@@ -1,4 +1,4 @@
-import type { Vec2 } from "kaboom";
+import type { Vec2 } from "kaplay";
 import k from "@/game";
 import { lifeMarker } from "@/entities/lifeMarker";
 import type { MarkerComp } from "@/entities/lifeMarker";

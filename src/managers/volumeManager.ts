@@ -1,11 +1,11 @@
 import type {
   ColorComp,
   GameObj,
-  KaboomCtx,
+  KAPLAYCtx,
   OpacityComp,
   PosComp,
   TextComp,
-} from "kaboom";
+} from "kaplay";
 import {titleFont} from '../config';
 
 const DATA_KEY_VOLUME = "dk_volume";
@@ -15,35 +15,36 @@ export interface IVolumeController {
   volumeDisplay: GameObj<TextComp | PosComp | ColorComp | OpacityComp>;
 }
 
-export default function volumeController(kaboomInst: KaboomCtx) {
-  const volumeDisplay = kaboomInst.add([
-    kaboomInst.text("Volume", {
+export default function volumeController(kaplayInst: KAPLAYCtx) {
+  const volumeDisplay = kaplayInst.add([
+    kaplayInst.text("Volume", {
       size: 5,
       width: 60,
       font: titleFont,
     }),
-    kaboomInst.pos(kaboomInst.width() - 50, 5),
-    kaboomInst.color(255, 255, 255),
-    kaboomInst.opacity(0),
+    kaplayInst.pos(kaplayInst.width() - 60, 5),
+    kaplayInst.color(255, 255, 255),
+    kaplayInst.opacity(0),
   ]);
 
   function displayVolume(nextVolume: number) {
     volumeDisplay.text = `Volume: ${Math.round(nextVolume * 100)}%`;
     volumeDisplay.opacity = 1;
 
-    kaboomInst.wait(3, () => {
+    kaplayInst.wait(3, () => {
       volumeDisplay.opacity = 0;
     });
   }
 
-  kaboomInst.onKeyRelease("v", () => {
-    const currentVolume = kaboomInst.getData(DATA_KEY_VOLUME, 1);
+  kaplayInst.onKeyRelease("v", () => {
+    const currentVolume = kaplayInst.getVolume();
     let nextVolume = currentVolume + volumeIncrement;
     if (nextVolume > 1) nextVolume = 0;
-    kaboomInst.volume(nextVolume);
-    kaboomInst.setData(DATA_KEY_VOLUME, nextVolume);
+    kaplayInst.setVolume(nextVolume);
+    kaplayInst.setData(DATA_KEY_VOLUME, nextVolume);
     displayVolume(nextVolume);
   });
 
-  kaboomInst.volume(kaboomInst.getData(DATA_KEY_VOLUME, 1));
+  const savedVolume = kaplayInst.getData(DATA_KEY_VOLUME, 1) || kaplayInst.getVolume();
+  kaplayInst.setVolume(savedVolume);
 }

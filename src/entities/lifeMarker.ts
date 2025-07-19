@@ -1,5 +1,5 @@
-import { Vec2 } from "kaboom";
-import type { GameObj, PosComp, RectComp, ColorComp } from "kaboom";
+import { Vec2 } from "kaplay";
+import type { GameObj, PosComp, RectComp, ColorComp } from "kaplay";
 import k from "@/game";
 
 export type MarkerComp = GameObj<PosComp | RectComp | ColorComp>;
