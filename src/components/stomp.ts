@@ -1,4 +1,4 @@
-import type { SpriteComp } from "kaboom";
+import type { SpriteComp } from "kaplay";
 import k from "@/game";
 import inputManager from "@/managers/inputManager";
 

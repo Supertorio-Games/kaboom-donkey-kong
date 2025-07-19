@@ -1,18 +1,18 @@
 {
-  "name": "kaboom-donkey-kong",
+  "name": "kaplay-donkey-kong",
   "version": "1.0.0",
   "type": "module",
   "description": "",
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/kaboom-donkey-kong/",
+    "build": "tsc && vite build --base=/kaplay-donkey-kong/",
     "preview": "vite preview"
   },
   "author": "",
   "license": "mit",
   "dependencies": {
-    "kaboom": "^3000.1.1"
+    "kaplay": "^3001.0.19"
   },
   "devDependencies": {
     "@types/node": "^20.5.2",

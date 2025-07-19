@@ -1,4 +1,4 @@
-import type { Vec2 } from "kaboom";
+import type { Vec2 } from "kaplay";
 import k from "@/game";
 
 const { vec2, deg2rad } = k;

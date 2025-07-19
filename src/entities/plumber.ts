@@ -4,7 +4,7 @@ import {
   PosComp,
   SpriteComp,
   Vec2,
-} from "kaboom";
+} from "kaplay";
 import k from "@/game";
 import characterController, {
   CharacterControllerComp,

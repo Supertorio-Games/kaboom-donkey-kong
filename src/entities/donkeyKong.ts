@@ -1,7 +1,7 @@
 import k from "../game";
 import stomp from "../components/stomp";
 
-import type { Vec2 } from "kaboom";
+import type { Vec2 } from "kaplay";
 
 export const donkeyKong = (starPos: Vec2) => [
   k.sprite("donkeyKong", {

@@ -1,9 +1,9 @@
-import { EventController, Vec2 } from "kaboom";
+import { KEventController, Vec2 } from "kaplay";
 import k from "@/game";
 import barrel, { barrelTag } from "@/entities/barrel";
 
 export default function barrelManager(spawnPos: Vec2, spawnDelay: number) {
-  let spawnerController: EventController;
+  let spawnerController: KEventController;
 
   function startSpawning() {
     spawnerController = k.loop(spawnDelay, () => {

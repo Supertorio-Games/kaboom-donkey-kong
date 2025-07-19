@@ -1,4 +1,4 @@
-import type { Comp, SpriteComp, PosComp, AudioPlay } from "kaboom";
+import type { Comp, SpriteComp, PosComp, AudioPlay } from "kaplay";
 import k from "@/game";
 import { levelMargin } from "@/config";
 import createMachine from "@/utils/stateMachine";

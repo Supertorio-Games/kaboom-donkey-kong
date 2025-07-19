@@ -1,4 +1,4 @@
-import type { Vec2 } from "kaboom";
+import type { Vec2 } from "kaplay";
 import k from "@/game";
 import { clamp } from "@/utils/math";
 import { displayNumber } from "@/entities/displayNumber";

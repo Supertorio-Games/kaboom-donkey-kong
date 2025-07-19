@@ -5,7 +5,7 @@ export const SCENE_KEY = "start-screen";
 
 export default k.scene(SCENE_KEY, ({ onStartGame }) => {
   k.add([
-    k.text("DONKEY KONG\n  KABOOM!", {
+    k.text("DONKEY KONG\n  KAPLAY!", {
       size: 17,
       width: 200,
       font: titleFont,

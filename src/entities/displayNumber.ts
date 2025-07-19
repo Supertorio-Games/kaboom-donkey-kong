@@ -1,5 +1,5 @@
-import { Vec2 } from "kaboom";
-import type { GameObj, PosComp, SpriteComp } from "kaboom";
+import { Vec2 } from "kaplay";
+import type { GameObj, PosComp, SpriteComp } from "kaplay";
 import k from "@/game";
 
 export type DisplayNumberComp = GameObj<SpriteComp | PosComp>;

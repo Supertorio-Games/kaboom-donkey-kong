@@ -1,4 +1,4 @@
-import type { GameObj, PosComp, SpriteComp } from "kaboom";
+import type { GameObj, PosComp, SpriteComp } from "kaplay";
 import k from "@/game";
 import { levelMargin } from "@/config";
 import { angleToVec2 } from "@/utils/angle2Vector";
