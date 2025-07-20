@@ -22,13 +22,13 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  yarn
+  npm install
 ```
 
 Start the server
 
 ```bash
-  yarn start
+  npm run start
 ```
 
 
