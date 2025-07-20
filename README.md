@@ -3,7 +3,7 @@
 
 The Atari 2600 version of Donkey Kong, built from the ground up in Kaplay.js (Originally in Kaboom.js).
 
-
+You can view a post-mortem of the develpoment process here: [https://www.supertorio.dev/post-mortem-recreating-donkey-kong-in-javascript/](https://www.supertorio.dev/post-mortem-recreating-donkey-kong-in-javascript/)
 
 ## Run Locally
 
@@ -30,7 +30,6 @@ Start the server
 ```bash
   npm run start
 ```
-
 
 ## Authors
 
